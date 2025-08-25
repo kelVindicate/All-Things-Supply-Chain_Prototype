@@ -15,7 +15,6 @@ from email.mime.text import MIMEText
 
 from openai import OpenAI
 from dotenv import load_dotenv
-import os
 import json
 
 from urllib.parse import quote_plus
@@ -340,13 +339,13 @@ st.title("Supply Chain News Generator")
 with st.form("Subscribe"):
     name = st.text_input ("Enter your name:")
     email = st.text_input ("Enter your email:")
-    key_industry = st.selectbox("Select your key industry:", ["Agriculture", "Biomedical", "Pharmaceutical", "Electronics", "Energy", "Oil", "Construction", "General Manufacturing", "Precision Engineering", "Air Transport", "Sea Transport", "Land Trandport"])
+    key_industry = st.selectbox("Select your key industry:", ["Agriculture", "Biomedical", "Pharmaceutical", "Electronics", "Energy", "Oil", "Construction", "General Manufacturing", "Precision Engineering", "Air Transport", "Sea Transport", "Land Transport"])
     free_text_location = st.text_input("Enter location (optional):", value="United States")
     submitted = st.form_submit_button("Generate news")
 
 if submitted:
     if not email or "@" not in email:
-        st.error("Invalue email address.")
+        st.error("Invalid email address.")
     else:
         conn.execute('''
         insert into users (email, name, key_industry, free_text_location, confirmed, token, active)
