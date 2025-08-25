@@ -233,3 +233,4 @@ pysqlite3-binary
 chromadb==0.5.23
 onnxruntime==1.19.2
 crewai==0.148.0
+duckdb==1.1.2
