@@ -38,7 +38,6 @@ docker==7.1.0
 docstring_parser==0.17.0
 docx2txt==0.9
 durationpy==0.10
-embedchain==0.1.128
 et_xmlfile==2.0.0
 executing==2.2.0
 fastapi==0.116.1
@@ -178,7 +177,6 @@ regex==2025.7.34
 requests==2.32.4
 requests-oauthlib==2.0.0
 requests-toolbelt==1.0.0
-rich<14.0.0
 rpds-py==0.27.0
 rsa==4.9.1
 schema==0.7.7
