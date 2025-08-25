@@ -1,3 +1,10 @@
+import sys 
+try:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+except Exception:
+    pass
+
 import os
 from dotenv import load_dotenv
 from openai import OpenAI

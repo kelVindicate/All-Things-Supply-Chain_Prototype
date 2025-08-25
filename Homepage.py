@@ -1,3 +1,10 @@
+import sys 
+try:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+except Exception:
+    pass
+
 # <---Changelog--->
 # 11/08/25: Implemented Streamlit
 
