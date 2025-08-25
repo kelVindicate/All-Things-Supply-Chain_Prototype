@@ -13,7 +13,7 @@ agent=Agent(
 )
 Task=Task(description="Say hello in one short sentence")
 Crew=Crew(agents=[agent],tasks=[task])
-If st.button("Run"):
+if st.button("Run"):
               try:
                             result=crew.kickoff()
                              st.success(result)
