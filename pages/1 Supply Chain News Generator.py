@@ -20,8 +20,6 @@ import datetime
 from datetime import datetime, timedelta, timezone
 from typing import List
 
-
-from authentication import check_password
 from auth_hardcoded import login_form, require_login, logout_button
 from helper_functions.geo_normalise import geo_normalise
 # <---- User LOGIN ----->
