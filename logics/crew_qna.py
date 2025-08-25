@@ -13,7 +13,7 @@ except Exception:
 import os
 
 from dotenv import load_dotenv
-from crewai_tools import DirectorySearchTool
+
 from pathlib import Path
 
 load_dotenv(".env")
@@ -147,6 +147,7 @@ def build_crew(repository: Path) -> Crew:
 # <---Runner--->
 def process_qna(user_query: str, repository_path: str | Path = "repository_working"):
     from crewai import Agent, Task, Crew
+    from crewai_tools.directory_search_tool.directory_search_tool import DirectorySearchTool
     crew = build_crew(Path(repository_path))
     repository_working = Path(repository_path)
     result = crew.kickoff(inputs = {"user_query": user_query})

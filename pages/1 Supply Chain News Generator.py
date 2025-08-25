@@ -44,10 +44,10 @@ logout_button()
 
 # <----- calling openai ---->
 load_dotenv(".env")
-AI_MODEL = st.secrets("OPENAI_MODEL_NAME")
+AI_MODEL = st.secrets["OPENAI_MODEL_NAME"]
 
 client = OpenAI(
-    api_key = st.secrets("OPENAI_API_KEY")
+    api_key = st.secrets["OPENAI_API_KEY"]
 )
 
 # setting up sqlite3 to store user data
