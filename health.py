@@ -6,8 +6,7 @@ from crewai import Agent, Task, Crew
 agent=Agent(
               role="Greeter",
               goal="Say hi and stop.",
-              backstory=”A
-friendly agent.”,
+              backstory= "A friendly agent.",
               verbose=True,
               allow_delegation=False,
               llm="gpt-4o=mini"
