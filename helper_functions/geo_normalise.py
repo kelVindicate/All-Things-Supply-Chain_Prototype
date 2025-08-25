@@ -13,7 +13,7 @@ import json
 from typing import Optional, TypedDict
 from openai import OpenAI
 from dotenv import load_dotenv
-from crewai import Agent, Task, Crew
+
 
 load_dotenv(".env")
 
@@ -29,6 +29,7 @@ def _fallback(query: str) -> GeoResult:
         return {"canonical_name": ""}
 
 def geo_normalise(query: str) -> GeoResult:
+    from crewai import Agent, Task, Crew
     """
     Normalises a geographical query to a canonical form.
     
