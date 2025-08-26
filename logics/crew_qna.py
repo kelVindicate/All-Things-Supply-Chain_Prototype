@@ -11,6 +11,8 @@ except Exception:
 
 # <---Libraries--->
 import os
+from crewai import Agent, Task, Crew, Process
+from local_tools.directory_search_tool import DirectorySearchTool
 
 from dotenv import load_dotenv
 
@@ -124,12 +126,7 @@ task_analyse = Task(
 )
 task_analyse.context = [task_prompt_engineering, task_research]
 
-# <---Crew--->
-crew = Crew(agents = [agent_prompt_engineer, agent_researcher, agent_analyst],
-            tasks = [task_prompt_engineering, task_research, task_analyse],
-            process = Process.sequential,
-            verbose = True,
-            max_execution_time = 200)
+
 
 def build_crew(repository: Path) -> Crew:
     if not repository.exists() or not repository.is_dir():
@@ -144,11 +141,10 @@ def build_crew(repository: Path) -> Crew:
                 verbose = True,
                 max_execution_time = 200)
 
-# <---Runner--->
+# ---- Runner ----
 def process_qna(user_query: str, repository_path: str | Path = "repository_working"):
-    from crewai import Agent, Task, Crew
-    from crewai_tools.directory_search_tool.directory_search_tool import DirectorySearchTool
-    crew = build_crew(Path(repository_path))
-    repository_working = Path(repository_path)
-    result = crew.kickoff(inputs = {"user_query": user_query})
+    repo_path = Path(repository_path)
+    crew = build_crew(repo_path)
+    result = crew.kickoff(inputs={"user_query": user_query})
+    # return the last task's raw output (same as your original intention)
     return result.tasks_output[-1].raw
