@@ -138,8 +138,7 @@ def build_crew(repository: Path) -> Crew:
     return Crew(agents = [agent_prompt_engineer, agent_researcher, agent_analyst],
                 tasks = [task_prompt_engineering, task_research, task_analyse],
                 process = Process.sequential,
-                verbose = True,
-                max_execution_time = 200)
+                verbose = True)
 
 # ---- Runner ----
 def process_qna(user_query: str, repository_path: str | Path = "repository_working"):
