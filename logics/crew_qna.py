@@ -12,7 +12,7 @@ except Exception:
 # <---Libraries--->
 import os
 from crewai import Agent, Task, Crew, Process
-from local_tools.directory_search_tool import DirectorySearchTool
+from crewai_tools import DirectorySearchTool
 
 from dotenv import load_dotenv
 
