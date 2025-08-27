@@ -1,21 +1,9 @@
-import os 
-os.environ.setdefault("CHROMA_DB_IMPL", "duckdb+parquet")
-os.environ.setdefault("CREWAI_STORAGE_DIR", ".crewai_storage")
-
-import sys 
-try:
-    import pysqlite3
-    sys.modules["sqlite3"] = pysqlite3
-except Exception:
-    pass
-
 # <---Libraries--->
 import os
-from crewai import Agent, Task, Crew, Process
-from crewai_tools import DirectorySearchTool
 
 from dotenv import load_dotenv
-
+from crewai import Agent, Task, Crew, Process
+from crewai_tools import DirectorySearchTool
 from pathlib import Path
 
 load_dotenv(".env")
@@ -126,7 +114,12 @@ task_analyse = Task(
 )
 task_analyse.context = [task_prompt_engineering, task_research]
 
-
+# <---Crew--->
+crew = Crew(agents = [agent_prompt_engineer, agent_researcher, agent_analyst],
+            tasks = [task_prompt_engineering, task_research, task_analyse],
+            process = Process.sequential,
+            verbose = True,
+            max_execution_time = 200)
 
 def build_crew(repository: Path) -> Crew:
     if not repository.exists() or not repository.is_dir():
@@ -138,12 +131,12 @@ def build_crew(repository: Path) -> Crew:
     return Crew(agents = [agent_prompt_engineer, agent_researcher, agent_analyst],
                 tasks = [task_prompt_engineering, task_research, task_analyse],
                 process = Process.sequential,
-                verbose = True)
+                verbose = True,
+                max_execution_time = 200)
 
-# ---- Runner ----
+# <---Runner--->
 def process_qna(user_query: str, repository_path: str | Path = "repository_working"):
-    repo_path = Path(repository_path)
-    crew = build_crew(repo_path)
-    result = crew.kickoff(inputs={"user_query": user_query})
-    # return the last task's raw output (same as your original intention)
+    crew = build_crew(Path(repository_path))
+    repository_working = Path(repository_path)
+    result = crew.kickoff(inputs = {"user_query": user_query})
     return result.tasks_output[-1].raw
