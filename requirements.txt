@@ -7,3 +7,4 @@ crewai-tools==0.60.0
 streamlit==1.48.0
 extra-streamlit-components==0.1.80
 bcrypt==4.3.0
+gdown==5.2.0
